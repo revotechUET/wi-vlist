@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="asdf"></div>
+
+
+  <script src="./bower_components/virtual-list/vlist.js"></script>
+  <script>
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////// THIS IS IN index.js FILE//////////////////////////////////////////////////////////////////////////
+    /////  COPY ONLY TO AVOID module.exports////////////////////////////////////////////////////////////////
+    ////   SOMETIME NEED TO UPDATE BY COPY IN index.js TO WORK/////////////////////////////////////////////
+    class WiVirtualList {
+      constructor(config) {
+        this._validateConfig(config);
+
+        this.width = config.width;
+        this.height = config.height;
+        this.itemHeight = config.itemHeight;
+        this.totalRows = config.totalRows;
+        this.htmlContainerSelector = config.htmlContainerSelector;
+        this.generatorFn = config.generatorFn;
+        
+
+
+        if (!VirtualList) throw new Error('Not yet import virtual-list in html file');
+        this.vList = new VirtualList({
+          w: this.width,
+          h: this.height,
+          totalRows: 100,
+          itemHeight: this.itemHeight,
+          generatorFn: this.generatorFn
+        })
+        this.insertVlistDom();
+      }
+
+
+      insertVlistDom() {
+        const $container = document.querySelector(this.htmlContainerSelector)
+        $container.appendChild(this.vList.container)
+      }
+
+      updateDom() {
+        const totalHeight = itemHeight * vList.totalRows;
+        const screenItemsLen = Math.ceil(height / itemHeight);
+        const cachedItemsLen = screenItemsLen * 3;
+
+        this.vList._renderChunk(
+          vList.container,
+          parseInt(vList.container.scrollTop / itemHeight) - screenItemsLen,
+          cachedItemsLen
+        );
+        this.vList.scroller.style.height = `${totalHeight}px`;
+      }
+
+
+      _validateConfig(config) {
+        if (!config.width) throw new Error('width is required');
+        if (!config.height) throw new Error('height is required');
+        if (!config.itemHeight) throw new Error('itemHeight is required');
+        if (!config.generatorFn) throw new Error('generatorFn is required');
+        if (!config.htmlContainerSelector) throw new Error('htmlContainerSelector is required');
+        if (!config.totalRows) throw new Error('totalRows is required');
+      }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    ////////  END COPY ////////////////////////////////////////////////////////////////////////
+
+
+    //example here
+    const vList = new WiVirtualList({
+      height: 300,
+      width: 300,
+      itemHeight: 31,
+      htmlContainerSelector:'#asdf',
+      totalRows: 100,
+      generatorFn: function (row) {
+        var el = document.createElement("div")
+        el.innerHTML = "ITEM " + row
+        el.style.borderBottom = "1px solid red"
+        el.style.position = "absolute"
+        return el
+      }
+    })
+  </script>
+</body>
+
+</html>

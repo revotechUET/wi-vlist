@@ -1,0 +1,20 @@
+{
+  "name": "wi-vlist",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "bmq928@gmail.com"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "virtual-list": "1.0.0"
+  }
+}
