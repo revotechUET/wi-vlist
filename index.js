@@ -26,6 +26,15 @@ module.exports = class WiVirtualList {
   }
 
   /**
+   * 
+   * @param {Number} num number of row
+   */
+  setTotalRows(num) {
+    this.vList.totalRows = num;
+    this.updateDom();
+  }
+
+  /**
    * insert the list into container
    */
   insertVlistDom() {
@@ -34,7 +43,7 @@ module.exports = class WiVirtualList {
   }
 
   updateDom() {
-    const totalHeight = itemHeight * vList.totalRows;
+    const totalHeight = itemHeight * this.vList.totalRows;
     const screenItemsLen = Math.ceil(height / itemHeight);
     const cachedItemsLen = screenItemsLen * 3;
 
