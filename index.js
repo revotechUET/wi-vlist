@@ -55,6 +55,16 @@ class WiVirtualList {
     this.vList.scroller.style.height = `${totalHeight}px`;
   }
 
+  /**
+   * 
+   * @param {Object} css  sample {'width': '300px'}
+   */
+  setContainerStyle(css) {
+    for(const [attr, value] of Object.entries(css)) {
+      this.vList.container.style[attr] = value
+    }
+  }
+
 
   _validateConfig(config) {
     if (!config.width) throw new Error('width is required');
