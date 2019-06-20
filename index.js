@@ -1,7 +1,7 @@
 /**
  * This class is a helper which help for render virtually
  */
-module.exports = class WiVirtualList {
+class WiVirtualList {
   constructor(config) {
     this._validateConfig(config);
 
