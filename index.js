@@ -18,7 +18,7 @@ class WiVirtualList {
     this.vList = new VirtualList({
       w: this.width,
       h: this.height,
-      totalRows: 100,
+      totalRows: this.totalRows,
       itemHeight: this.itemHeight,
       generatorFn: this.generatorFn
     })
@@ -43,13 +43,13 @@ class WiVirtualList {
   }
 
   updateDom() {
-    const totalHeight = itemHeight * this.vList.totalRows;
-    const screenItemsLen = Math.ceil(height / itemHeight);
+    const totalHeight = this.itemHeight * this.vList.totalRows;
+    const screenItemsLen = Math.ceil(this.height / this.itemHeight);
     const cachedItemsLen = screenItemsLen * 3;
 
     this.vList._renderChunk(
-      vList.container,
-      parseInt(vList.container.scrollTop / itemHeight) - screenItemsLen,
+      this.vList.container,
+      parseInt(this.vList.container.scrollTop / this.itemHeight) - screenItemsLen,
       cachedItemsLen
     );
     this.vList.scroller.style.height = `${totalHeight}px`;
