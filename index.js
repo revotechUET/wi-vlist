@@ -9,7 +9,8 @@ class WiVirtualList {
     this.height = config.height;
     this.itemHeight = config.itemHeight;
     this.totalRows = config.totalRows;
-    this.htmlContainerSelector = config.htmlContainerSelector;
+    // this.htmlContainerSelector = config.htmlContainerSelector;
+    this.htmlContainerElement = config.htmlContainerElement;
     this.generatorFn = config.generatorFn;
     
 
@@ -38,8 +39,10 @@ class WiVirtualList {
    * insert the list into container
    */
   insertVlistDom() {
-    const $container = document.querySelector(this.htmlContainerSelector)
-    $container.appendChild(this.vList.container)
+    // const $container = document.querySelector(this.htmlContainerSelector)
+    // $container.appendChild(this.vList.container)
+
+    this.htmlContainerElement.appendChild(this.vList.container)
   }
 
   updateDom() {
@@ -71,7 +74,7 @@ class WiVirtualList {
     if (!config.height) throw new Error('height is required');
     if (!config.itemHeight) throw new Error('itemHeight is required');
     if (!config.generatorFn) throw new Error('generatorFn is required');
-    if (!config.htmlContainerSelector) throw new Error('htmlContainerSelector is required');
+    if (!config.htmlContainerElement) throw new Error('htmlContainerElement is required');
     if (!config.totalRows) throw new Error('totalRows is required');
   }
 }
