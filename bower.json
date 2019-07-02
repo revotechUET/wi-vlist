@@ -15,6 +15,6 @@
     "tests"
   ],
   "dependencies": {
-    "virtual-list": "1.0.0"
+    "virtual-list": "^1.0.0"
   }
 }
