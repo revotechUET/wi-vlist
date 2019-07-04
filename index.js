@@ -16,13 +16,14 @@ class WiVirtualList {
 
 
     if (!VirtualList) throw new Error('Not yet import virtual-list in html file');
-    this.vList = new VirtualList({
-      w: this.width,
-      h: this.height,
+    const vListOptions = {
       totalRows: this.totalRows,
       itemHeight: this.itemHeight,
-      generatorFn: this.generatorFn
-    })
+      generatorFn: this.generatorFn,
+    }
+    if(this.width) vListOptions.w = this.width
+    if(this.height) vListOptions.h = this.height
+    this.vList = new VirtualList(vListOptions)
     this.insertVlistDom();
   }
 
@@ -32,6 +33,12 @@ class WiVirtualList {
    */
   setTotalRows(num) {
     this.vList.totalRows = num;
+    this.updateDom();
+  }
+
+  changeContainerHeight(height) {
+    this.vList.height = height;
+    this.vList.container.style.height = height + 'px';
     this.updateDom();
   }
 
@@ -70,8 +77,8 @@ class WiVirtualList {
 
 
   _validateConfig(config) {
-    if (!config.width) throw new Error('width is required');
-    if (!config.height) throw new Error('height is required');
+    // if (!config.width) throw new Error('width is required');
+    // if (!config.height) throw new Error('height is required');
     if (!config.itemHeight) throw new Error('itemHeight is required');
     if (!config.generatorFn) throw new Error('generatorFn is required');
     if (!config.htmlContainerElement) throw new Error('htmlContainerElement is required');
