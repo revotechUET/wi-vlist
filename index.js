@@ -65,6 +65,16 @@ class WiVirtualList {
     this.vList.scroller.style.height = `${totalHeight}px`;
   }
 
+  scrollToIdx(idx) {
+    const screenItemsLen = Math.ceil(this.height / this.itemHeight);
+    const cachedItemsLen = screenItemsLen * 3;
+    this.vList._renderChunk(
+      this.vList.container,
+      idx,
+      cachedItemsLen
+    )
+  }
+
   /**
    * 
    * @param {Object} css  sample {'width': '300px'}
